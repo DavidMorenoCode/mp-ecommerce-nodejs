@@ -2,11 +2,9 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 const mercadopago = require('mercadopago');
 const bodyParser = require('body-parser');
-const fs = require('fs');
 
 mercadopago.configure({
-   access_token:
-   "APP_USR-8208253118659647-112521-dd670f3fd6aa9147df51117701a2082e-677408439",
+   access_token:"APP_USR-8208253118659647-112521-dd670f3fd6aa9147df51117701a2082e-677408439",
    integrator_id:'dev_2e4ad5dd362f11eb809d0242ac130004'
 });
 
@@ -80,11 +78,10 @@ app.post('/notifications', function (req, res, next) {
 app.post('/iniciar_pago', function(req, res){
 
     // Crea un objeto de preferencia
-
-    let preference = {
+   let preference = {
       items: [
          {	
-				id: "1234",
+				id: 1234,
             title: title,
             unit_price: parseInt(price),
             picture_url: img,
