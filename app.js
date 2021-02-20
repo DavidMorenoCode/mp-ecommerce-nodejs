@@ -9,8 +9,8 @@ mercadopago.configure({
 });
 
 datos={
-   //  urlApp: "localhost:3001",
-    urlApp: "davidmoreno-mp-commerce-node.herokuapp.com"
+   urlApp: "localhost:3001"
+   // urlApp: "davidmoreno-mp-commerce-node.herokuapp.com"
 }
 
 var app = express();
@@ -76,7 +76,7 @@ app.post('/notifications', function (req, res, next) {
 });
 
 app.post('/iniciar_pago', function(req, res){
-
+   const {title, price, img, unit} = req.body;
     // Crea un objeto de preferencia
    let preference = {
       items: [
