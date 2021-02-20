@@ -1,4 +1,6 @@
 var express = require("express");
+const fs = require('fs');
+const https = require('https');
 var exphbs = require("express-handlebars");
 const mercadopago = require("mercadopago");
 const bodyParser = require("body-parser");
@@ -10,7 +12,7 @@ mercadopago.configure({
 });
 
 datos = {
-   // urlApp: "localhost:3001"
+   // urlApp: "https://localhost:3001"
    urlApp: "https://davidmoreno-mp-commerce-node.herokuapp.com",
 };
 
@@ -49,6 +51,7 @@ app.post("/notifications", function (req, res, next) {
       console.log("--------------------------El ID de pago es: " + idPago);
    }
    console.log(req.body.data);
+   res.send(req.body)
    res.sendStatus(201);
 });
 
@@ -111,7 +114,8 @@ app.post("/iniciar_pago", function (req, res) {
    console.log("################### El preference ####################");
    console.log(preference);
    console.log("######################################################");
-
+   
+   console.log('up');
    mercadopago.preferences
       .create(preference)
       .then(function (response) {
@@ -129,12 +133,20 @@ app.post("/iniciar_pago", function (req, res) {
       .catch(function (error) {
          console.log(error);
       });
+
 });
 
 app.use(express.static("assets"));
 
 app.use("/assets", express.static(__dirname + "/assets"));
 
-app.listen(process.env.PORT || 3001, () => {
-   console.log("Servidor iniciado");
-});
+// app.listen(process.env.PORT || 3001, () => {
+//    console.log("Servidor iniciado");
+// });
+
+https.createServer({
+   key: fs.readFileSync('my_cert.key'),
+   cert: fs.readFileSync('my_cert.crt')
+ }, app).listen(process.env.PORT|| 3001, function(){
+   console.log("My HTTPS server listening on port " + 3001 + "...");
+ });
