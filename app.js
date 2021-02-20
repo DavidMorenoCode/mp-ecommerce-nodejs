@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 
 mercadopago.configure({
-    access_token: 'APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398',
-    integrator_id: 'dev_24c65fb163bf11ea96500242ac130004',
+   access_token:
+   "APP_USR-8208253118659647-112521-dd670f3fd6aa9147df51117701a2082e-677408439",
+   integrator_id:'dev_2e4ad5dd362f11eb809d0242ac130004'
 });
 
 datos={
@@ -81,51 +82,57 @@ app.post('/iniciar_pago', function(req, res){
     // Crea un objeto de preferencia
 
     let preference = {
-        items: [{
-            id: 1234,
-            title: req.body.title,
-            description: "Dispositivo móvil de Tienda e-commerce",
-            picture_url: datos.urlApp+req.body.img,
-            quantity: 1,
-            unit_price: Number(req.body.price),
-            external_reference: "fernandoc@epidataconsulting.com",
-        }],
-        external_reference: "fernandoc@epidataconsulting.com",
-        payer:{
-            name: "Lalo",
-            surname: "Landa",
-            email: "test_user_63274575@testuser.com",
-            phone:{
-                area_code: "11",
-                number: 22223333,
-            },
-            address:{
-                street_name: "False",
-                street_number: 123,
-                zip_code: "1111",
-            },
-        },
-        back_urls:{
-            failure: `${datos.urlApp}/failure`,
-            pending: `${datos.urlApp}/pending`,
-            success: `${datos.urlApp}/aproved`
-        },
-        auto_return: "approved",
-        notification_url: `${datos.urlApp}/notifications`,
-        payment_methods: {
-            excluded_payment_methods: [
-                {
-                id: "amex"
-                }
-            ],
-            excluded_payment_types: [
-                {
-                id: "atm"
-                }
-            ],
-            installments: 6,
-        },
-    };
+      items: [
+         {	
+				id: "1234",
+            title: title,
+            unit_price: parseInt(price),
+            picture_url: img,
+				description: "Dispositivo móvil de Tienda e-commerce",
+            quantity: parseInt(unit),
+            external_reference: "davidmorenosoft@gmail.com"
+         },
+      ],
+		payer:{
+			name: "Lalo",
+			surname: "Landa",
+			email: "test_user_46542185@testuser.com",
+			phone:{
+				area_code: "52",
+				number: 5549737300
+			},
+			identification:{
+				type: "DNI",
+				number: "22334445"
+			},
+			address:{
+				street_name: "Insurgentes Sur",
+				street_number: 1602,
+				zip_code: "03940"
+			}
+		},
+		payment_methods:{
+			installments: 6,
+         excluded_payment_methods:[
+            {
+               id: "atm"
+            }
+         ],
+         excluded_payment_types:[
+            {
+               id: "diners"
+            }
+         ]
+      },
+      back_urls:{
+         failure: `${datos.urlApp}/failure`,
+         pending: `${datos.urlApp}/pending`,
+         success: `${datos.urlApp}/aproved`
+     },
+      notification_url: `${datos.urlApp}/notifications`,
+      auto_return: "approved",
+		external_reference: "davidmorenosoft@gmail.com"
+   };
 
     console.log("################### El preference ####################")
     console.log(preference);
