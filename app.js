@@ -9,8 +9,8 @@ mercadopago.configure({
 });
 
 datos={
-   urlApp: "localhost:3001"
-   // urlApp: "davidmoreno-mp-commerce-node.herokuapp.com"
+   // urlApp: "localhost:3001"
+   urlApp: "davidmoreno-mp-commerce-node.herokuapp.com"
 }
 
 var app = express();
