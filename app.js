@@ -47,7 +47,7 @@ app.post("/notifications", function (req, res, next) {
 
    let idPago = req.body.data.id;
    if (idPago) {
-      console.log("--------------------------El ID de pago es: " + idPago);
+      console.log("El ID de pago es: " + idPago);
    }
    res.sendStatus(201);
 });
