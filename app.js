@@ -1,6 +1,5 @@
 var express = require("express");
-const fs = require('fs');
-const https = require('https');
+
 var exphbs = require("express-handlebars");
 const mercadopago = require("mercadopago");
 const bodyParser = require("body-parser");
@@ -140,13 +139,7 @@ app.use(express.static("assets"));
 
 app.use("/assets", express.static(__dirname + "/assets"));
 
-// app.listen(process.env.PORT || 3001, () => {
-//    console.log("Servidor iniciado");
-// });
+app.listen(process.env.PORT || 3001, () => {
+   console.log("Servidor iniciado");
+});
 
-https.createServer({
-   key: fs.readFileSync('my_cert.key'),
-   cert: fs.readFileSync('my_cert.crt')
- }, app).listen(process.env.PORT|| 3001, function(){
-   console.log("My HTTPS server listening on port " + 3001 + "...");
- });
