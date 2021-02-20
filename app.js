@@ -49,8 +49,6 @@ app.post("/notifications", function (req, res, next) {
    if (idPago) {
       console.log("--------------------------El ID de pago es: " + idPago);
    }
-   console.log(req.body.data);
-   res.send(req.body)
    res.sendStatus(201);
 });
 
@@ -114,18 +112,11 @@ app.post("/iniciar_pago", function (req, res) {
    console.log(preference);
    console.log("######################################################");
    
-   console.log('up');
+   
    mercadopago.preferences
       .create(preference)
       .then(function (response) {
-         // con global id
-         // Este valor reemplazará el string "<%= global.id %>" en tu HTML
-         // global.id = response.body.id;
-         // console.log(global.id);
-
-         // Con init point
-         console.log('Reference_id:');
-         console.log(response.body.id);
+         
          global.init_point = response.body.init_point;
          res.redirect(global.init_point);
       })
