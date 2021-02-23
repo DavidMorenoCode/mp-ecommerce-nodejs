@@ -63,7 +63,7 @@ app.post("/iniciar_pago", function (req, res) {
             id: 1234,
             title: title,
             unit_price: parseInt(price),
-            picture_url: `${urlApp}${img}`,
+            picture_url: `${datos.urlApp}${img}`,
             description: "Dispositivo móvil de Tienda e-commerce",
             quantity: parseInt(unit),
             external_reference: "davidmorenocode@gmail.com",
