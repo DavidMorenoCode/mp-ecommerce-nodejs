@@ -41,13 +41,15 @@ app.get("/aproved", function (req, res) {
 });
 
 app.post("/notifications", function (req, res, next) {
-   console.log("**************************WEBHOOK**************************");
-   console.log(req.body);
-   console.log("************************FIN WEBHOOK************************");
+   console.log("**************************↓↓WEBHOOK↓↓**************************");
+   console.log(req.body.data);
+   console.log("************************↑↑FIN WEBHOOK↑↑************************");
 
    let idPago = req.body.data.id;
    if (idPago) {
+      console.log("**************************↓↓ID↓↓**************************");
       console.log("El ID de pago es: " + idPago);
+      console.log("************************↑↑FIN ID↑↑************************");
    }
    res.sendStatus(201);
 });
@@ -61,10 +63,10 @@ app.post("/iniciar_pago", function (req, res) {
             id: 1234,
             title: title,
             unit_price: parseInt(price),
-            picture_url: img,
+            picture_url: `${urlApp}${img}`,
             description: "Dispositivo móvil de Tienda e-commerce",
             quantity: parseInt(unit),
-            external_reference: "davidmorenosoft@gmail.com",
+            external_reference: "davidmorenocode@gmail.com",
          },
       ],
       payer: {
@@ -105,7 +107,7 @@ app.post("/iniciar_pago", function (req, res) {
       },
       notification_url: `${datos.urlApp}/notifications`,
       auto_return: "approved",
-      external_reference: "davidmorenosoft@gmail.com",
+      external_reference: "davidmorenocode@gmail.com",
    };
 
    console.log("################### El preference ####################");
@@ -115,8 +117,7 @@ app.post("/iniciar_pago", function (req, res) {
    
    mercadopago.preferences
       .create(preference)
-      .then(function (response) {
-         
+      .then(function (response) {         
          global.init_point = response.body.init_point;
          res.redirect(global.init_point);
       })
@@ -131,6 +132,5 @@ app.use(express.static("assets"));
 app.use("/assets", express.static(__dirname + "/assets"));
 
 app.listen(process.env.PORT || 3001, () => {
-   console.log("Servidor iniciado");
 });
 
