@@ -42,9 +42,9 @@ app.get("/aproved", function (req, res) {
 
 app.post("/notifications", function (req, res, next) {
    console.log("**************************↓↓WEBHOOK↓↓**************************");
-   console.log(req.body.data);
+   console.log(req.body);
    console.log("************************↑↑FIN WEBHOOK↑↑************************");
-
+   console.log("------------------------------------------------------------------------------");
    let idPago = req.body.data.id;
    if (idPago) {
       console.log("**************************↓↓ID↓↓**************************");
@@ -110,9 +110,9 @@ app.post("/iniciar_pago", function (req, res) {
       external_reference: "davidmorenocode@gmail.com",
    };
 
-   console.log("################### El preference ####################");
+   console.log("################### PREFERENCE ####################");
    console.log(preference);
-   console.log("######################################################");
+   console.log("#####################FIN PREFERENCE#########################");
    
    
    mercadopago.preferences
