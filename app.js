@@ -49,6 +49,7 @@ app.post("/notifications", function (req, res, next) {
    if (idPago) {
       console.log("**************************↓↓ID↓↓**************************");
       console.log("El ID de pago es: " + idPago);
+      console.log("El app_id de pago es: " + req.body.data.application_id);
       console.log("************************↑↑FIN ID↑↑************************");
    }
    res.sendStatus(201);
@@ -91,12 +92,12 @@ app.post("/iniciar_pago", function (req, res) {
          installments: 6,
          excluded_payment_methods: [
             {
-               id: "atm",
+               id: "diners",
             },
          ],
          excluded_payment_types: [
             {
-               id: "diners",
+               id: "atm",
             },
          ],
       },
@@ -110,10 +111,6 @@ app.post("/iniciar_pago", function (req, res) {
       external_reference: "davidmorenocode@gmail.com",
    };
 
-   console.log("################### PREFERENCE ####################");
-   console.log(preference);
-   console.log("#####################FIN PREFERENCE#########################");
-   
    
    mercadopago.preferences
       .create(preference)
